@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://znwear.github.io/zn-wear-website/sitemap.xml
