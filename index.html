@@ -114,7 +114,7 @@
   .brand strong{font-family:var(--serif);font-size:30px;font-weight:700;letter-spacing:.14em}
   .brand span{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
   nav.main{margin-left:auto}
-  nav.main ul{display:flex;gap:4px;list-style:none;margin:0;padding:0}
+  nav.main ul{display:flex;flex-wrap:wrap;gap:4px;list-style:none;margin:0;padding:0}
   nav.main a{display:block;text-decoration:none;font-size:14.5px;font-weight:600;padding:9px 12px;border-radius:999px;color:var(--text)}
   nav.main a:hover{background:var(--surface-2);color:var(--green-800)}
   @media (prefers-color-scheme: dark){ nav.main a:hover{color:var(--text)} }
@@ -265,6 +265,66 @@
   @media (prefers-color-scheme: dark){ .copied{color:var(--accent)} }
   @media (max-width:820px){ .contact-grid{grid-template-columns:1fr;gap:32px} .field-row{grid-template-columns:1fr} }
 
+  /* Tools: dirndl configurator */
+  .cfg-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:40px;align-items:start}
+  .opt-group{border:0;margin:0 0 24px;padding:0;min-width:0}
+  .opt-group legend{font-family:var(--serif);font-size:21px;font-weight:600;text-transform:uppercase;margin-bottom:10px;padding:0}
+  .chips{display:flex;flex-wrap:wrap;gap:9px}
+  .chip{position:relative;display:inline-block}
+  .chip input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+  .chip span{display:inline-block;padding:9px 15px;border:1.5px solid var(--border);border-radius:999px;background:var(--surface);font-size:14.5px;font-weight:600;transition:border-color .15s ease,background .15s ease,color .15s ease}
+  .chip:hover span{border-color:var(--brass)}
+  .chip input:checked + span{background:var(--green-800);border-color:var(--green-800);color:#fff}
+  @media (prefers-color-scheme: dark){ .chip input:checked + span{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)} }
+  .chip input:focus-visible + span{outline:3px solid var(--brass);outline-offset:2px}
+  .cfg-summary{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:26px;box-shadow:var(--shadow);position:sticky;top:88px}
+  .cfg-summary h3{font-family:var(--serif);font-size:26px;font-weight:600;margin:0 0 8px}
+  .cfg-summary dl{margin:0}
+  .cfg-summary .row{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-top:1px solid var(--border)}
+  .cfg-summary dt{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:2px}
+  .cfg-summary dd{margin:0;font-weight:600;text-align:right}
+  .cfg-summary .cta-col{display:flex;flex-direction:column;gap:10px;margin-top:18px}
+  .cfg-summary .cta-col .btn{width:100%}
+  @media (max-width:820px){ .cfg-grid{grid-template-columns:1fr} .cfg-summary{position:static} }
+
+  /* Tools: size & measurement guide */
+  .msr-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:44px;align-items:start}
+  .msr-figure{margin:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px;box-shadow:var(--shadow)}
+  .msr-figure svg{width:100%;height:auto;max-height:440px}
+  .msr-figure .silhouette{fill:var(--surface-2);stroke:var(--brass);stroke-width:1.6}
+  .msr-figure .ml{stroke:var(--muted);stroke-width:1.6;stroke-dasharray:5 4;transition:stroke .15s ease}
+  .msr-figure .ml.active{stroke:var(--rose);stroke-width:3;stroke-dasharray:none}
+  .msr-figure .mlab{font-family:var(--serif);font-size:15px;font-weight:700;fill:var(--muted)}
+  .msr-figure .mlab.active{fill:var(--rose)}
+  .unit-toggle{display:inline-flex;border:1px solid var(--border);border-radius:999px;overflow:hidden;background:var(--surface);margin-bottom:14px}
+  .unit-toggle button{border:0;background:transparent;color:var(--muted);font:600 13.5px/1 var(--sans);padding:9px 16px;cursor:pointer}
+  .unit-toggle button[aria-pressed="true"]{background:var(--green-800);color:#fff}
+  @media (prefers-color-scheme: dark){ .unit-toggle button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)} }
+  .measure{border-top:1px solid var(--border)}
+  .measure.last{border-bottom:1px solid var(--border)}
+  .measure-head{width:100%;display:flex;align-items:center;gap:13px;background:none;border:0;padding:15px 2px;cursor:pointer;font:inherit;color:var(--text);text-align:left}
+  .m-badge{flex-shrink:0;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--brass);color:var(--brass);display:inline-flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:700;font-size:16px}
+  .measure.open .m-badge{background:var(--brass);color:#fff}
+  .m-name{font-weight:700;font-size:16.5px}
+  .m-val{margin-left:auto;font-weight:600;color:var(--muted);font-size:14.5px;white-space:nowrap}
+  .measure-head::after{content:"+";font-size:22px;font-weight:400;color:var(--brass);flex-shrink:0}
+  .measure.open .measure-head::after{content:"–"}
+  .measure-body{display:none;padding:0 2px 18px 45px}
+  .measure.open .measure-body{display:block}
+  .measure-body p{margin:0 0 12px;color:var(--muted);font-size:15.5px;max-width:52ch}
+  .m-input{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .m-input label{font-weight:700;font-size:14px}
+  .m-input input{width:110px;font:inherit;font-size:15.5px;color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:10px 12px}
+  .m-input .unit{color:var(--muted);font-weight:600}
+  .msr-result{margin-top:24px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px}
+  .msr-result h3{font-family:var(--serif);font-size:23px;font-weight:600;margin:0 0 6px}
+  .msr-result .size-line{font-size:17px;font-weight:700;margin:0 0 4px;color:var(--text)}
+  .msr-result p{margin:0;color:var(--muted);font-size:14.5px}
+  .msr-result .break-line{font-weight:600;color:var(--text);font-size:15px;margin-bottom:6px}
+  .msr-result .break-line:empty{display:none}
+  .msr-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+  @media (max-width:820px){ .msr-grid{grid-template-columns:1fr;gap:28px} .measure-body{padding-left:2px} }
+
   /* Floating WhatsApp button */
   .wa-float{position:fixed;right:20px;bottom:20px;z-index:60;display:inline-flex;align-items:center;gap:9px;background:#1faa55;color:#fff;text-decoration:none;font-weight:700;font-size:15px;padding:13px 20px 13px 15px;border-radius:999px;box-shadow:0 10px 28px rgba(18,60,35,.35);transition:transform .15s ease,background .15s ease}
   .wa-float:hover{background:#178a44;transform:translateY(-2px)}
@@ -294,6 +354,8 @@
         <li><a href="#mieder" data-k="nav.bodice">Das Mieder</a></li>
         <li><a href="#ablauf" data-k="nav.process">Ablauf</a></li>
         <li><a href="#stoffe" data-k="nav.fabrics">Stoffe</a></li>
+        <li><a href="#konfigurator" data-k="nav.config">Konfigurator</a></li>
+        <li><a href="#masse" data-k="nav.measure">Maßguide</a></li>
         <li><a href="#atelier" data-k="nav.atelier">Atelier</a></li>
         <li><a href="#faq" data-k="nav.faq">Fragen</a></li>
       </ul>
@@ -468,6 +530,191 @@
     </div>
   </section>
 
+  <!-- CONFIGURATOR -->
+  <section id="konfigurator" aria-labelledby="cfg-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker" data-k="cfg.kicker">Dirndl-Konfigurator</p>
+        <h2 id="cfg-h" data-k="cfg.title">Stellen Sie Ihr Dirndl zusammen</h2>
+        <p data-k="cfg.intro">Wählen Sie Stil, Mieder, Schürze und Stoff — Ihre Auswahl wird als fertige Anfrage erstellt und per E-Mail oder WhatsApp an uns gesendet. Preis, Mindestmenge und Lieferzeit nennen wir je nach Design.</p>
+      </div>
+      <div class="cfg-grid">
+        <div>
+          <fieldset class="opt-group">
+            <legend data-k="cfg.gStyle">Stil des Dirndls</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="cfgStyle" value="cfg.s1" checked /><span data-k="cfg.s1">Klassisch</span></label>
+              <label class="chip"><input type="radio" name="cfgStyle" value="cfg.s2" /><span data-k="cfg.s2">Festlich</span></label>
+              <label class="chip"><input type="radio" name="cfgStyle" value="cfg.s3" /><span data-k="cfg.s3">Brautdirndl</span></label>
+              <label class="chip"><input type="radio" name="cfgStyle" value="cfg.s4" /><span data-k="cfg.s4">Modern</span></label>
+              <label class="chip"><input type="radio" name="cfgStyle" value="cfg.s5" /><span data-k="cfg.s5">Landhaus-Stil</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="opt-group">
+            <legend data-k="cfg.gBodice">Mieder</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="cfgBodice" value="cfg.b1" checked /><span data-k="cfg.b1">Mit Schnürung vorne</span></label>
+              <label class="chip"><input type="radio" name="cfgBodice" value="cfg.b2" /><span data-k="cfg.b2">Mit Stickerei</span></label>
+              <label class="chip"><input type="radio" name="cfgBodice" value="cfg.b3" /><span data-k="cfg.b3">Samt-Mieder</span></label>
+              <label class="chip"><input type="radio" name="cfgBodice" value="cfg.b4" /><span data-k="cfg.b4">Schlicht, ohne Verzierung</span></label>
+              <label class="chip"><input type="radio" name="cfgBodice" value="cfg.b5" /><span data-k="cfg.b5">Rohling zur eigenen Fertigstellung</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="opt-group">
+            <legend data-k="cfg.gApron">Schürze</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="cfgApron" value="cfg.a1" checked /><span data-k="cfg.a1">Seidenschürze</span></label>
+              <label class="chip"><input type="radio" name="cfgApron" value="cfg.a2" /><span data-k="cfg.a2">Leinenschürze</span></label>
+              <label class="chip"><input type="radio" name="cfgApron" value="cfg.a3" /><span data-k="cfg.a3">Spitzenschürze</span></label>
+              <label class="chip"><input type="radio" name="cfgApron" value="cfg.a4" /><span data-k="cfg.a4">Passend zum Rockstoff</span></label>
+              <label class="chip"><input type="radio" name="cfgApron" value="cfg.a5" /><span data-k="cfg.a5">Ohne Schürze</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="opt-group">
+            <legend data-k="cfg.gFabric">Stoff</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="cfgFabric" value="cfg.f1" checked /><span data-k="cfg.f1">Samt</span></label>
+              <label class="chip"><input type="radio" name="cfgFabric" value="cfg.f2" /><span data-k="cfg.f2">Leinen</span></label>
+              <label class="chip"><input type="radio" name="cfgFabric" value="cfg.f3" /><span data-k="cfg.f3">Seide</span></label>
+              <label class="chip"><input type="radio" name="cfgFabric" value="cfg.f4" /><span data-k="cfg.f4">Jacquard</span></label>
+              <label class="chip"><input type="radio" name="cfgFabric" value="cfg.f5" /><span data-k="cfg.f5">Baumwolle</span></label>
+            </div>
+          </fieldset>
+          <div class="field">
+            <label for="cfgNotes" data-k="cfg.notes">Details &amp; Wünsche (optional)</label>
+            <textarea id="cfgNotes" data-k-ph="cfg.notesPh" placeholder="Größenlauf, Stückzahl, Farben, besondere Wünsche …"></textarea>
+          </div>
+        </div>
+        <aside class="cfg-summary">
+          <h3 data-k="cfg.sumTitle">Ihre Auswahl</h3>
+          <dl>
+            <div class="row"><dt data-k="cfg.sumStyle">Stil</dt><dd id="sumStyle">—</dd></div>
+            <div class="row"><dt data-k="cfg.sumBodice">Mieder</dt><dd id="sumBodice">—</dd></div>
+            <div class="row"><dt data-k="cfg.sumApron">Schürze</dt><dd id="sumApron">—</dd></div>
+            <div class="row"><dt data-k="cfg.sumFabric">Stoff</dt><dd id="sumFabric">—</dd></div>
+          </dl>
+          <div class="cta-col">
+            <a class="btn btn-primary" id="cfgWa" href="https://wa.me/923246154799" target="_blank" rel="noopener" data-k="cfg.sendWa">Auswahl per WhatsApp senden</a>
+            <a class="btn btn-ghost" id="cfgMail" href="mailto:znwear129@gmail.com" data-k="cfg.sendMail">Auswahl per E-Mail senden</a>
+            <button class="btn btn-ghost" id="cfgCopy" type="button" data-k="cfg.copy">Text kopieren</button>
+          </div>
+          <p class="copied" id="cfgCopied" role="status" aria-live="polite"></p>
+          <p class="fineprint" data-k="cfg.fine">Es wird nichts gespeichert und nichts gesendet, bis Sie E-Mail oder WhatsApp öffnen. Angebot je nach Design.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIZE & MEASUREMENT GUIDE -->
+  <section id="masse" aria-labelledby="msr-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker" data-k="msr.kicker">Maßguide</p>
+        <h2 id="msr-h" data-k="msr.title">Größen- &amp; Maßguide</h2>
+        <p data-k="msr.intro">Fünf Maße genügen für eine erste Einschätzung. Nehmen Sie die Maße direkt am Körper mit einem weichen Maßband — wir fertigen anschließend nach Ihren Maßen und Ihrem Größenlauf, nicht nach einer Standardtabelle.</p>
+      </div>
+      <div class="msr-grid">
+        <figure class="msr-figure">
+          <svg viewBox="0 0 220 320" role="img" aria-label="Dirndl-Silhouette mit den fünf Maßlinien: Brust, Taille, Hüfte, Taillenlänge und Rocklänge">
+            <path class="silhouette" d="M92 26 Q110 38 128 26 L137 45 Q143 54 141 68 L147 106 Q149 121 145 133 L173 280 Q110 295 47 280 L75 133 Q71 121 73 106 L79 68 Q77 54 83 45 Z" />
+            <line class="ml" data-m="bust" x1="62" y1="92" x2="158" y2="92" />
+            <text class="mlab" data-m="bust" x="164" y="97">A</text>
+            <line class="ml" data-m="waist" x1="68" y1="133" x2="152" y2="133" />
+            <text class="mlab" data-m="waist" x="158" y="138">B</text>
+            <line class="ml" data-m="hip" x1="58" y1="170" x2="162" y2="170" />
+            <text class="mlab" data-m="hip" x="168" y="175">C</text>
+            <line class="ml" data-m="back" x1="198" y1="34" x2="198" y2="133" />
+            <text class="mlab" data-m="back" x="190" y="24">D</text>
+            <line class="ml" data-m="skirt" x1="22" y1="133" x2="22" y2="282" />
+            <text class="mlab" data-m="skirt" x="14" y="302">E</text>
+          </svg>
+          <figcaption data-k="msr.caption">Die fünf Maße: A Brustumfang, B Taillenumfang, C Hüftumfang, D Taillenlänge hinten, E Rocklänge.</figcaption>
+        </figure>
+        <div>
+          <div class="unit-toggle" role="group" aria-label="Einheit wählen / Choose unit">
+            <button type="button" id="unitCm" aria-pressed="true">cm</button>
+            <button type="button" id="unitIn" aria-pressed="false">in (Zoll)</button>
+          </div>
+          <div class="measure open" data-m="bust">
+            <button type="button" class="measure-head" aria-expanded="true">
+              <span class="m-badge">A</span><span class="m-name" data-k="msr.bust">Brustumfang</span><span class="m-val" id="valBust"></span>
+            </button>
+            <div class="measure-body">
+              <p data-k="msr.bustHow">Maßband waagerecht um die stärkste Stelle der Brust legen und unter den Armen hindurchführen. Das Band soll anliegen, aber nicht einschnüren — normal weiteratmen.</p>
+              <div class="m-input">
+                <label for="inBust" data-k="msr.your">Ihr Maß</label>
+                <input id="inBust" type="number" inputmode="decimal" min="0" step="0.5" />
+                <span class="unit" data-unit>cm</span>
+              </div>
+            </div>
+          </div>
+          <div class="measure" data-m="waist">
+            <button type="button" class="measure-head" aria-expanded="false">
+              <span class="m-badge">B</span><span class="m-name" data-k="msr.waist">Taillenumfang</span><span class="m-val" id="valWaist"></span>
+            </button>
+            <div class="measure-body">
+              <p data-k="msr.waistHow">An der schmalsten Stelle der Taille messen, meist knapp über dem Bauchnabel. Bauch nicht einziehen, das Band flach und waagerecht führen.</p>
+              <div class="m-input">
+                <label for="inWaist" data-k="msr.your">Ihr Maß</label>
+                <input id="inWaist" type="number" inputmode="decimal" min="0" step="0.5" />
+                <span class="unit" data-unit>cm</span>
+              </div>
+            </div>
+          </div>
+          <div class="measure" data-m="hip">
+            <button type="button" class="measure-head" aria-expanded="false">
+              <span class="m-badge">C</span><span class="m-name" data-k="msr.hip">Hüftumfang</span><span class="m-val" id="valHip"></span>
+            </button>
+            <div class="measure-body">
+              <p data-k="msr.hipHow">Um die stärkste Stelle des Gesäßes messen, die Füße geschlossen halten und das Band waagerecht um die Hüfte legen.</p>
+              <div class="m-input">
+                <label for="inHip" data-k="msr.your">Ihr Maß</label>
+                <input id="inHip" type="number" inputmode="decimal" min="0" step="0.5" />
+                <span class="unit" data-unit>cm</span>
+              </div>
+            </div>
+          </div>
+          <div class="measure" data-m="back">
+            <button type="button" class="measure-head" aria-expanded="false">
+              <span class="m-badge">D</span><span class="m-name" data-k="msr.back">Taillenlänge hinten</span><span class="m-val" id="valBack"></span>
+            </button>
+            <div class="measure-body">
+              <p data-k="msr.backHow">Vom Nackenwirbel — dem spürbaren Knochen am Halsansatz — entlang der Wirbelsäule bis zur Taille messen. Am besten von einer zweiten Person messen lassen.</p>
+              <div class="m-input">
+                <label for="inBack" data-k="msr.your">Ihr Maß</label>
+                <input id="inBack" type="number" inputmode="decimal" min="0" step="0.5" />
+                <span class="unit" data-unit>cm</span>
+              </div>
+            </div>
+          </div>
+          <div class="measure last" data-m="skirt">
+            <button type="button" class="measure-head" aria-expanded="false">
+              <span class="m-badge">E</span><span class="m-name" data-k="msr.skirt">Rocklänge</span><span class="m-val" id="valSkirt"></span>
+            </button>
+            <div class="measure-body">
+              <p data-k="msr.skirtHow">Von der Taille bis zur gewünschten Saumkante messen — am besten mit den Schuhen, die zum Dirndl getragen werden.</p>
+              <div class="m-input">
+                <label for="inSkirt" data-k="msr.your">Ihr Maß</label>
+                <input id="inSkirt" type="number" inputmode="decimal" min="0" step="0.5" />
+                <span class="unit" data-unit>cm</span>
+              </div>
+            </div>
+          </div>
+          <div class="msr-result">
+            <h3 data-k="msr.resultTitle">Ihre Richtgröße</h3>
+            <p class="size-line" id="msrSizeLine" data-k="msr.resultEmpty">Geben Sie Brust-, Taillen- und Hüftumfang ein — die Richtgröße erscheint hier.</p>
+            <p class="break-line" id="msrBreak"></p>
+            <p data-k="msr.resultNote">Richtwerte nach einer üblichen Konfektionstabelle, nur zur Orientierung. ZN WEAR fertigt nach Ihren Maßen — die endgültige Passform besprechen wir je nach Design.</p>
+            <div class="msr-actions">
+              <a class="btn btn-primary" id="msrWa" href="https://wa.me/923246154799" target="_blank" rel="noopener" data-k="msr.sendWa">Maße per WhatsApp senden</a>
+              <a class="btn btn-ghost" id="msrMail" href="mailto:znwear129@gmail.com" data-k="msr.sendMail">Maße per E-Mail senden</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ATELIER -->
   <section id="atelier" aria-labelledby="atelier-h">
     <div class="wrap split">
@@ -584,6 +831,8 @@
           <li><a href="#mieder" data-k="nav.bodice">Das Mieder</a></li>
           <li><a href="#ablauf" data-k="nav.process">Ablauf</a></li>
           <li><a href="#stoffe" data-k="nav.fabrics">Stoffe</a></li>
+          <li><a href="#konfigurator" data-k="nav.config">Konfigurator</a></li>
+          <li><a href="#masse" data-k="nav.measure">Maßguide</a></li>
           <li><a href="#atelier" data-k="nav.atelier">Atelier</a></li>
           <li><a href="#kontakt" data-k="nav.cta">Anfrage senden</a></li>
         </ul>
@@ -668,6 +917,34 @@
       "mail.open":"E-Mail öffnen","wa.open":"WhatsApp öffnen",
       "foot.tag":"Hersteller & Lieferant von Trachten, Dirndl und maßgeschneiderten Miedern — Sialkot, Pakistan. Angebot je nach Design.",
       "foot.small":"© 2026 ZN WEAR, Sialkot · znwear129@gmail.com · +92 324 6154799 · Preise, Mindestmengen und Lieferzeiten je nach Design.",
+      "nav.config":"Konfigurator","nav.measure":"Maßguide",
+      "cfg.kicker":"Dirndl-Konfigurator","cfg.title":"Stellen Sie Ihr Dirndl zusammen",
+      "cfg.intro":"Wählen Sie Stil, Mieder, Schürze und Stoff — Ihre Auswahl wird als fertige Anfrage erstellt und per E-Mail oder WhatsApp an uns gesendet. Preis, Mindestmenge und Lieferzeit nennen wir je nach Design.",
+      "cfg.gStyle":"Stil des Dirndls","cfg.s1":"Klassisch","cfg.s2":"Festlich","cfg.s3":"Brautdirndl","cfg.s4":"Modern","cfg.s5":"Landhaus-Stil",
+      "cfg.gBodice":"Mieder","cfg.b1":"Mit Schnürung vorne","cfg.b2":"Mit Stickerei","cfg.b3":"Samt-Mieder","cfg.b4":"Schlicht, ohne Verzierung","cfg.b5":"Rohling zur eigenen Fertigstellung",
+      "cfg.gApron":"Schürze","cfg.a1":"Seidenschürze","cfg.a2":"Leinenschürze","cfg.a3":"Spitzenschürze","cfg.a4":"Passend zum Rockstoff","cfg.a5":"Ohne Schürze",
+      "cfg.gFabric":"Stoff","cfg.f1":"Samt","cfg.f2":"Leinen","cfg.f3":"Seide","cfg.f4":"Jacquard","cfg.f5":"Baumwolle",
+      "cfg.notes":"Details & Wünsche (optional)","cfg.notesPh":"Größenlauf, Stückzahl, Farben, besondere Wünsche …",
+      "cfg.sumTitle":"Ihre Auswahl","cfg.sumStyle":"Stil","cfg.sumBodice":"Mieder","cfg.sumApron":"Schürze","cfg.sumFabric":"Stoff","cfg.none":"Noch nicht gewählt",
+      "cfg.sendWa":"Auswahl per WhatsApp senden","cfg.sendMail":"Auswahl per E-Mail senden","cfg.copy":"Text kopieren","cfg.copied":"Text kopiert — fügen Sie ihn in E-Mail oder WhatsApp ein.",
+      "cfg.fine":"Es wird nichts gespeichert und nichts gesendet, bis Sie E-Mail oder WhatsApp öffnen. Angebot je nach Design.",
+      "cfg.msgSubject":"Anfrage: Dirndl aus dem Konfigurator",
+      "cfg.msgBody":"Guten Tag,\n\nich habe auf Ihrer Website ein Dirndl zusammengestellt:\n\nStil: {style}\nMieder: {bodice}\nSchürze: {apron}\nStoff: {fabric}\nDetails: {notes}\n\nBitte nennen Sie mir Preis, Mindestmenge und Lieferzeit je nach Design.",
+      "msr.kicker":"Maßguide","msr.title":"Größen- & Maßguide",
+      "msr.intro":"Fünf Maße genügen für eine erste Einschätzung. Nehmen Sie die Maße direkt am Körper mit einem weichen Maßband — wir fertigen anschließend nach Ihren Maßen und Ihrem Größenlauf, nicht nach einer Standardtabelle.",
+      "msr.caption":"Die fünf Maße: A Brustumfang, B Taillenumfang, C Hüftumfang, D Taillenlänge hinten, E Rocklänge.",
+      "msr.bust":"Brustumfang","msr.bustHow":"Maßband waagerecht um die stärkste Stelle der Brust legen und unter den Armen hindurchführen. Das Band soll anliegen, aber nicht einschnüren — normal weiteratmen.",
+      "msr.waist":"Taillenumfang","msr.waistHow":"An der schmalsten Stelle der Taille messen, meist knapp über dem Bauchnabel. Bauch nicht einziehen, das Band flach und waagerecht führen.",
+      "msr.hip":"Hüftumfang","msr.hipHow":"Um die stärkste Stelle des Gesäßes messen, die Füße geschlossen halten und das Band waagerecht um die Hüfte legen.",
+      "msr.back":"Taillenlänge hinten","msr.backHow":"Vom Nackenwirbel — dem spürbaren Knochen am Halsansatz — entlang der Wirbelsäule bis zur Taille messen. Am besten von einer zweiten Person messen lassen.",
+      "msr.skirt":"Rocklänge","msr.skirtHow":"Von der Taille bis zur gewünschten Saumkante messen — am besten mit den Schuhen, die zum Dirndl getragen werden.",
+      "msr.your":"Ihr Maß",
+      "msr.resultTitle":"Ihre Richtgröße","msr.resultEmpty":"Geben Sie Brust-, Taillen- und Hüftumfang ein — die Richtgröße erscheint hier.",
+      "msr.rMain":"Richtgröße:","msr.rBust":"Brust","msr.rWaist":"Taille","msr.rHip":"Hüfte",
+      "msr.resultNote":"Richtwerte nach einer üblichen Konfektionstabelle, nur zur Orientierung. ZN WEAR fertigt nach Ihren Maßen — die endgültige Passform besprechen wir je nach Design.",
+      "msr.sendWa":"Maße per WhatsApp senden","msr.sendMail":"Maße per E-Mail senden",
+      "msr.msgSubject":"Anfrage: Maße aus dem Maßguide",
+      "msr.msgBody":"Guten Tag,\n\nhier sind meine Maße aus dem Maßguide Ihrer Website:\n\nBrustumfang: {bust}\nTaillenumfang: {waist}\nHüftumfang: {hip}\nTaillenlänge hinten: {back}\nRocklänge: {skirt}\nRichtgröße (nach Brust): {size}\n\nBitte besprechen Sie Passform und Angebot je nach Design mit mir.",
       "title":"ZN WEAR — Trachten, Dirndl & maßgeschneiderte Mieder aus Sialkot",
       "mail.subject":"Anfrage: {topic}",
       "mail.body":"Guten Tag,\n\nich interessiere mich für eine Zusammenarbeit mit ZN WEAR.\n\nName: {name}\nMarke / Atelier: {brand}\nAnliegen: {topic}\n\nDesignidee:\n{msg}\n\nBitte nennen Sie mir Preis, Mindestmenge und Lieferzeit je nach Design.\n\nMit freundlichen Grüßen\n{name}"
@@ -738,6 +1015,34 @@
       "mail.open":"Open email","wa.open":"Open WhatsApp",
       "foot.tag":"Manufacturer & supplier of Trachten, dirndls and custom bodices — Sialkot, Pakistan. Quote per design.",
       "foot.small":"© 2026 ZN WEAR, Sialkot · znwear129@gmail.com · +92 324 6154799 · Prices, minimum quantities and lead times per design.",
+      "nav.config":"Configurator","nav.measure":"Size guide",
+      "cfg.kicker":"Dirndl configurator","cfg.title":"Put your dirndl together",
+      "cfg.intro":"Choose the style, bodice, apron and fabric — your selection is turned into a ready-made enquiry and sent to us by email or WhatsApp. Price, minimum quantity and lead time are quoted per design.",
+      "cfg.gStyle":"Dirndl style","cfg.s1":"Classic","cfg.s2":"Festive","cfg.s3":"Bridal dirndl","cfg.s4":"Modern","cfg.s5":"Country-house style",
+      "cfg.gBodice":"Bodice","cfg.b1":"Front lacing","cfg.b2":"With embroidery","cfg.b3":"Velvet bodice","cfg.b4":"Plain, unadorned","cfg.b5":"Blank for your own finishing",
+      "cfg.gApron":"Apron","cfg.a1":"Silk apron","cfg.a2":"Linen apron","cfg.a3":"Lace apron","cfg.a4":"Matching the skirt fabric","cfg.a5":"No apron",
+      "cfg.gFabric":"Fabric","cfg.f1":"Velvet","cfg.f2":"Linen","cfg.f3":"Silk","cfg.f4":"Jacquard","cfg.f5":"Cotton",
+      "cfg.notes":"Details & wishes (optional)","cfg.notesPh":"Size range, quantity, colours, special wishes …",
+      "cfg.sumTitle":"Your selection","cfg.sumStyle":"Style","cfg.sumBodice":"Bodice","cfg.sumApron":"Apron","cfg.sumFabric":"Fabric","cfg.none":"Not chosen yet",
+      "cfg.sendWa":"Send selection on WhatsApp","cfg.sendMail":"Send selection by email","cfg.copy":"Copy text","cfg.copied":"Text copied — paste it into email or WhatsApp.",
+      "cfg.fine":"Nothing is saved and nothing is sent until you open email or WhatsApp. Quote per design.",
+      "cfg.msgSubject":"Enquiry: dirndl from the configurator",
+      "cfg.msgBody":"Hello,\n\nI have put together a dirndl on your website:\n\nStyle: {style}\nBodice: {bodice}\nApron: {apron}\nFabric: {fabric}\nDetails: {notes}\n\nPlease quote me price, minimum quantity and lead time per design.",
+      "msr.kicker":"Measurement guide","msr.title":"Size & measurement guide",
+      "msr.intro":"Five measurements are enough for a first assessment. Take them directly on the body with a soft tape measure — we then make to your measurements and your size range, not to a standard table.",
+      "msr.caption":"The five measurements: A bust, B waist, C hips, D back waist length, E skirt length.",
+      "msr.bust":"Bust","msr.bustHow":"Run the tape horizontally around the fullest part of the bust, passing under the arms. It should sit snug but not dig in — keep breathing normally.",
+      "msr.waist":"Waist","msr.waistHow":"Measure at the narrowest point of the waist, usually just above the navel. Do not pull your stomach in; keep the tape flat and horizontal.",
+      "msr.hip":"Hips","msr.hipHow":"Measure around the fullest part of the seat, feet together, keeping the tape horizontal around the hips.",
+      "msr.back":"Back waist length","msr.backHow":"Measure from the neck vertebra — the noticeable bone at the base of the neck — down the spine to the waist. Best done by a second person.",
+      "msr.skirt":"Skirt length","msr.skirtHow":"Measure from the waist to the hem length you want — ideally wearing the shoes that will be worn with the dirndl.",
+      "msr.your":"Your measurement",
+      "msr.resultTitle":"Your guide size","msr.resultEmpty":"Enter bust, waist and hip measurements — your guide size will appear here.",
+      "msr.rMain":"Guide size:","msr.rBust":"Bust","msr.rWaist":"Waist","msr.rHip":"Hips",
+      "msr.resultNote":"Guide values from a standard ready-to-wear table, for orientation only. ZN WEAR makes to your measurements — the final fit is discussed per design.",
+      "msr.sendWa":"Send measurements on WhatsApp","msr.sendMail":"Send measurements by email",
+      "msr.msgSubject":"Enquiry: measurements from the size guide",
+      "msr.msgBody":"Hello,\n\nhere are my measurements from the size guide on your website:\n\nBust: {bust}\nWaist: {waist}\nHips: {hip}\nBack waist length: {back}\nSkirt length: {skirt}\nGuide size (by bust): {size}\n\nPlease discuss fit and a quote per design with me.",
       "title":"ZN WEAR — Trachten, dirndls & custom bodices from Sialkot",
       "mail.subject":"Enquiry: {topic}",
       "mail.body":"Hello,\n\nI am interested in working with ZN WEAR.\n\nName: {name}\nBrand / atelier: {brand}\nEnquiry about: {topic}\n\nDesign idea:\n{msg}\n\nPlease quote me price, minimum quantity and lead time per design.\n\nKind regards\n{name}"
@@ -787,7 +1092,11 @@
     btnDe.setAttribute("aria-pressed", next === "de" ? "true" : "false");
     btnEn.setAttribute("aria-pressed", next === "en" ? "true" : "false");
     copiedMsg.textContent = "";
+    var cc = document.getElementById("cfgCopied");
+    if (cc) cc.textContent = "";
     compose();
+    cfgCompose();
+    msrUpdate();
   }
 
   btnDe.addEventListener("click", function(){ setLang("de"); });
@@ -827,7 +1136,154 @@
   });
 
   document.getElementById("composer").addEventListener("submit", function(e){ e.preventDefault(); });
+
+  /* ---- Dirndl configurator ---- */
+  function cfgPick(name){
+    var el = document.querySelector('input[name="' + name + '"]:checked');
+    return el ? el.value : null;
+  }
+  function cfgCompose(){
+    var dict = T[lang];
+    function lbl(key){ return key ? (dict[key] || key) : dict["cfg.none"]; }
+    var style = cfgPick("cfgStyle"), bodice = cfgPick("cfgBodice"),
+        apron = cfgPick("cfgApron"), fabric = cfgPick("cfgFabric");
+    document.getElementById("sumStyle").textContent = lbl(style);
+    document.getElementById("sumBodice").textContent = lbl(bodice);
+    document.getElementById("sumApron").textContent = lbl(apron);
+    document.getElementById("sumFabric").textContent = lbl(fabric);
+    var notes = document.getElementById("cfgNotes").value.trim();
+    var subject = dict["cfg.msgSubject"];
+    var body = dict["cfg.msgBody"]
+      .replace("{style}", lbl(style)).replace("{bodice}", lbl(bodice))
+      .replace("{apron}", lbl(apron)).replace("{fabric}", lbl(fabric))
+      .replace("{notes}", notes || "—");
+    document.getElementById("cfgMail").href = "mailto:znwear129@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+    document.getElementById("cfgWa").href = "https://wa.me/923246154799?text=" + encodeURIComponent(subject + "\n\n" + body);
+    return subject + "\n\n" + body;
+  }
+  document.querySelectorAll('input[name="cfgStyle"], input[name="cfgBodice"], input[name="cfgApron"], input[name="cfgFabric"]').forEach(function(r){
+    r.addEventListener("change", function(){
+      document.getElementById("cfgCopied").textContent = "";
+      cfgCompose();
+    });
+  });
+  document.getElementById("cfgNotes").addEventListener("input", cfgCompose);
+  document.getElementById("cfgCopy").addEventListener("click", function(){
+    var text = cfgCompose();
+    var target = document.getElementById("cfgCopied");
+    function done(){ target.textContent = T[lang]["cfg.copied"]; }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function(){ fallbackCopy(text); done(); });
+    } else { fallbackCopy(text); done(); }
+  });
+
+  /* ---- Size & measurement guide ---- */
+  var msrUnit = "cm";
+  var sizeTable = [
+    { s: 32, bust: 80,  waist: 64,  hip: 88  },
+    { s: 34, bust: 84,  waist: 68,  hip: 92  },
+    { s: 36, bust: 88,  waist: 72,  hip: 96  },
+    { s: 38, bust: 92,  waist: 76,  hip: 100 },
+    { s: 40, bust: 96,  waist: 80,  hip: 104 },
+    { s: 42, bust: 100, waist: 85,  hip: 108 },
+    { s: 44, bust: 105, waist: 90,  hip: 113 },
+    { s: 46, bust: 110, waist: 95,  hip: 118 },
+    { s: 48, bust: 115, waist: 100, hip: 123 },
+    { s: 50, bust: 120, waist: 106, hip: 128 },
+    { s: 52, bust: Infinity, waist: Infinity, hip: Infinity }
+  ];
+  function sizeFor(cm, field){
+    if (!cm || cm <= 0) return null;
+    for (var i = 0; i < sizeTable.length; i++){
+      if (cm < sizeTable[i][field]) return sizeTable[i].s;
+    }
+    return 52;
+  }
+  function msrRaw(id){
+    var v = parseFloat(document.getElementById(id).value.replace(",", "."));
+    return (isNaN(v) || v <= 0) ? null : v;
+  }
+  function msrCm(id){
+    var v = msrRaw(id);
+    if (v === null) return null;
+    return msrUnit === "in" ? v * 2.54 : v;
+  }
+  function msrFmt(id){
+    var v = msrRaw(id);
+    if (v === null) return "—";
+    return (Math.round(v * 10) / 10) + " " + (msrUnit === "in" ? "in" : "cm");
+  }
+  function msrUpdate(){
+    var dict = T[lang];
+    var sB = sizeFor(msrCm("inBust"), "bust"),
+        sW = sizeFor(msrCm("inWaist"), "waist"),
+        sH = sizeFor(msrCm("inHip"), "hip");
+    var line = document.getElementById("msrSizeLine");
+    line.textContent = sB ? dict["msr.rMain"] + " EU " + sB : dict["msr.resultEmpty"];
+    var parts = [];
+    if (sB) parts.push(dict["msr.rBust"] + ": EU " + sB);
+    if (sW) parts.push(dict["msr.rWaist"] + ": EU " + sW);
+    if (sH) parts.push(dict["msr.rHip"] + ": EU " + sH);
+    document.getElementById("msrBreak").textContent = parts.join(" · ");
+    [["inBust","valBust"],["inWaist","valWaist"],["inHip","valHip"],["inBack","valBack"],["inSkirt","valSkirt"]].forEach(function(p){
+      document.getElementById(p[1]).textContent = msrRaw(p[0]) !== null ? msrFmt(p[0]) : "";
+    });
+    var subject = dict["msr.msgSubject"];
+    var body = dict["msr.msgBody"]
+      .replace("{bust}", msrFmt("inBust")).replace("{waist}", msrFmt("inWaist"))
+      .replace("{hip}", msrFmt("inHip")).replace("{back}", msrFmt("inBack"))
+      .replace("{skirt}", msrFmt("inSkirt"))
+      .replace("{size}", sB ? "EU " + sB : "—");
+    document.getElementById("msrMail").href = "mailto:znwear129@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+    document.getElementById("msrWa").href = "https://wa.me/923246154799?text=" + encodeURIComponent(subject + "\n\n" + body);
+  }
+  ["inBust","inWaist","inHip","inBack","inSkirt"].forEach(function(id){
+    document.getElementById(id).addEventListener("input", msrUpdate);
+  });
+  function syncSvg(){
+    var open = document.querySelector(".measure.open");
+    var key = open ? open.getAttribute("data-m") : null;
+    document.querySelectorAll(".msr-figure .ml, .msr-figure .mlab").forEach(function(el){
+      el.classList.toggle("active", el.getAttribute("data-m") === key);
+    });
+  }
+  document.querySelectorAll(".measure-head").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var m = btn.parentElement;
+      var wasOpen = m.classList.contains("open");
+      document.querySelectorAll(".measure").forEach(function(x){
+        x.classList.remove("open");
+        x.querySelector(".measure-head").setAttribute("aria-expanded", "false");
+      });
+      if (!wasOpen){
+        m.classList.add("open");
+        btn.setAttribute("aria-expanded", "true");
+      }
+      syncSvg();
+    });
+  });
+  function setUnit(u){
+    if (u === msrUnit) { return; }
+    ["inBust","inWaist","inHip","inBack","inSkirt"].forEach(function(id){
+      var el = document.getElementById(id);
+      var v = parseFloat(el.value);
+      if (!isNaN(v) && v > 0){
+        el.value = u === "in" ? Math.round(v / 2.54 * 10) / 10 : Math.round(v * 2.54 * 10) / 10;
+      }
+    });
+    msrUnit = u;
+    document.getElementById("unitCm").setAttribute("aria-pressed", u === "cm" ? "true" : "false");
+    document.getElementById("unitIn").setAttribute("aria-pressed", u === "in" ? "true" : "false");
+    document.querySelectorAll("[data-unit]").forEach(function(s){ s.textContent = u === "in" ? "in" : "cm"; });
+    msrUpdate();
+  }
+  document.getElementById("unitCm").addEventListener("click", function(){ setUnit("cm"); });
+  document.getElementById("unitIn").addEventListener("click", function(){ setUnit("in"); });
+
   compose();
+  cfgCompose();
+  msrUpdate();
+  syncSvg();
 })();
 </script>
 </body>
