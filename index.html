@@ -152,6 +152,20 @@
     .menu-btn{padding:9px 10px}
   }
 
+  /* ---- Nav: Tools dropdown ---- */
+  nav.main li.has-sub{position:relative}
+  .nav-tools-btn{display:block;background:none;border:0;font-family:var(--sans);font-size:14.5px;font-weight:600;padding:9px 12px;border-radius:999px;color:var(--text);cursor:pointer}
+  .nav-tools-btn::after{content:"▾";margin-left:5px;font-size:11px;color:var(--brass)}
+  .nav-tools-btn:hover{background:var(--surface-2);color:var(--green-800)}
+  @media (prefers-color-scheme: dark){ .nav-tools-btn:hover{color:var(--text)} }
+  nav.main ul.sub{display:none;position:absolute;top:calc(100% + 8px);left:0;min-width:210px;background:var(--surface);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);padding:8px;flex-direction:column;gap:2px;z-index:60}
+  nav.main li.has-sub.open ul.sub{display:flex}
+  nav.main ul.sub a{white-space:nowrap}
+  @media (max-width:900px){
+    .nav-tools-btn{font-size:16px;padding:12px 10px;width:100%;text-align:left}
+    nav.main ul.sub{position:static;box-shadow:none;border:0;border-radius:0;background:transparent;padding:2px 0 6px 16px;min-width:0}
+  }
+
   /* ---- Hero ---- */
   .hero{padding:52px 0 30px}
   .hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:48px;align-items:center}
@@ -292,6 +306,9 @@
   .msr-figure{margin:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px;box-shadow:var(--shadow)}
   .msr-figure svg{width:100%;height:auto;max-height:440px}
   .msr-figure .silhouette{fill:var(--surface-2);stroke:var(--brass);stroke-width:1.6}
+  .msr-figure .apron{fill:color-mix(in srgb,var(--brass) 18%,var(--surface));stroke:var(--brass);stroke-width:1.4}
+  .msr-figure .bow{fill:color-mix(in srgb,var(--brass) 32%,var(--surface));stroke:var(--brass);stroke-width:1.1}
+  .msr-figure .seam,.msr-figure .lace{fill:none;stroke:var(--brass);stroke-width:1.1;opacity:.55}
   .msr-figure .ml{stroke:var(--muted);stroke-width:1.6;stroke-dasharray:5 4;transition:stroke .15s ease}
   .msr-figure .ml.active{stroke:var(--rose);stroke-width:3;stroke-dasharray:none}
   .msr-figure .mlab{font-family:var(--serif);font-size:15px;font-weight:700;fill:var(--muted)}
@@ -354,8 +371,13 @@
         <li><a href="#mieder" data-k="nav.bodice">Das Mieder</a></li>
         <li><a href="#ablauf" data-k="nav.process">Ablauf</a></li>
         <li><a href="#stoffe" data-k="nav.fabrics">Stoffe</a></li>
-        <li><a href="#konfigurator" data-k="nav.config">Konfigurator</a></li>
-        <li><a href="#masse" data-k="nav.measure">Maßguide</a></li>
+        <li class="has-sub">
+          <button type="button" class="nav-tools-btn" id="toolsBtn" aria-expanded="false" aria-haspopup="true"><span data-k="nav.tools">Tools</span></button>
+          <ul class="sub">
+            <li><a href="#konfigurator" data-k="nav.config">Konfigurator</a></li>
+            <li><a href="#masse" data-k="nav.measure">Maßguide</a></li>
+          </ul>
+        </li>
         <li><a href="#atelier" data-k="nav.atelier">Atelier</a></li>
         <li><a href="#faq" data-k="nav.faq">Fragen</a></li>
       </ul>
@@ -615,18 +637,29 @@
       </div>
       <div class="msr-grid">
         <figure class="msr-figure">
-          <svg viewBox="0 0 220 320" role="img" aria-label="Dirndl-Silhouette mit den fünf Maßlinien: Brust, Taille, Hüfte, Taillenlänge und Rocklänge">
-            <path class="silhouette" d="M92 26 Q110 38 128 26 L137 45 Q143 54 141 68 L147 106 Q149 121 145 133 L173 280 Q110 295 47 280 L75 133 Q71 121 73 106 L79 68 Q77 54 83 45 Z" />
-            <line class="ml" data-m="bust" x1="62" y1="92" x2="158" y2="92" />
-            <text class="mlab" data-m="bust" x="164" y="97">A</text>
-            <line class="ml" data-m="waist" x1="68" y1="133" x2="152" y2="133" />
-            <text class="mlab" data-m="waist" x="158" y="138">B</text>
-            <line class="ml" data-m="hip" x1="58" y1="170" x2="162" y2="170" />
-            <text class="mlab" data-m="hip" x="168" y="175">C</text>
-            <line class="ml" data-m="back" x1="198" y1="34" x2="198" y2="133" />
-            <text class="mlab" data-m="back" x="190" y="24">D</text>
-            <line class="ml" data-m="skirt" x1="22" y1="133" x2="22" y2="282" />
-            <text class="mlab" data-m="skirt" x="14" y="302">E</text>
+          <svg viewBox="0 0 220 320" role="img" aria-label="Dirndl-Silhouette mit Mieder, Schürze und den fünf Maßlinien: Brust, Taille, Hüfte, Taillenlänge und Rocklänge">
+            <!-- Dirndl: fitted bodice with scoop neckline and shoulder straps, defined waist, flared skirt -->
+            <path class="silhouette" d="M95 36 L89 22 L77 24 C79 36 79 47 80 57 C77 72 77 81 79 91 C81 111 84 127 88 140 C78 188 66 238 58 285 Q110 299 162 285 C154 238 142 188 132 140 C136 127 139 111 141 91 C143 81 143 72 140 57 C141 47 141 36 143 24 L131 22 L125 36 Q110 50 95 36 Z" />
+            <!-- Apron over the skirt, tied at the waist -->
+            <path class="apron" d="M94 141 L126 141 C129 182 132 224 134 260 Q110 270 86 260 C88 224 91 182 94 141 Z" />
+            <rect class="apron" x="91" y="134" width="38" height="9" rx="2" />
+            <path class="bow" d="M107 139 C99 132 94 133 95 139 C94 145 99 146 107 139 Z" />
+            <path class="bow" d="M113 139 C121 132 126 133 125 139 C126 145 121 146 113 139 Z" />
+            <circle class="bow" cx="110" cy="139" r="3" />
+            <!-- Waist seam and bodice front lacing -->
+            <line class="seam" x1="88" y1="140" x2="132" y2="140" />
+            <path class="lace" d="M104 60 L116 67 M116 60 L104 67 M104 71 L116 78 M116 71 L104 78 M104 82 L116 89 M116 82 L104 89 M104 93 L116 100 M116 93 L104 100 M104 104 L116 111 M116 104 L104 111 M104 115 L116 122 M116 115 L104 122 M104 126 L116 133 M116 126 L104 133" />
+            <!-- Measurement lines A–E -->
+            <line class="ml" data-m="bust" x1="64" y1="90" x2="156" y2="90" />
+            <text class="mlab" data-m="bust" x="162" y="95">A</text>
+            <line class="ml" data-m="waist" x1="70" y1="140" x2="150" y2="140" />
+            <text class="mlab" data-m="waist" x="156" y="145">B</text>
+            <line class="ml" data-m="hip" x1="60" y1="176" x2="160" y2="176" />
+            <text class="mlab" data-m="hip" x="166" y="181">C</text>
+            <line class="ml" data-m="back" x1="196" y1="30" x2="196" y2="140" />
+            <text class="mlab" data-m="back" x="187" y="22">D</text>
+            <line class="ml" data-m="skirt" x1="24" y1="140" x2="24" y2="288" />
+            <text class="mlab" data-m="skirt" x="15" y="308">E</text>
           </svg>
           <figcaption data-k="msr.caption">Die fünf Maße: A Brustumfang, B Taillenumfang, C Hüftumfang, D Taillenlänge hinten, E Rocklänge.</figcaption>
         </figure>
@@ -917,7 +950,7 @@
       "mail.open":"E-Mail öffnen","wa.open":"WhatsApp öffnen",
       "foot.tag":"Hersteller & Lieferant von Trachten, Dirndl und maßgeschneiderten Miedern — Sialkot, Pakistan. Angebot je nach Design.",
       "foot.small":"© 2026 ZN WEAR, Sialkot · znwear129@gmail.com · +92 324 6154799 · Preise, Mindestmengen und Lieferzeiten je nach Design.",
-      "nav.config":"Konfigurator","nav.measure":"Maßguide",
+      "nav.tools":"Tools","nav.config":"Konfigurator","nav.measure":"Maßguide",
       "cfg.kicker":"Dirndl-Konfigurator","cfg.title":"Stellen Sie Ihr Dirndl zusammen",
       "cfg.intro":"Wählen Sie Stil, Mieder, Schürze und Stoff — Ihre Auswahl wird als fertige Anfrage erstellt und per E-Mail oder WhatsApp an uns gesendet. Preis, Mindestmenge und Lieferzeit nennen wir je nach Design.",
       "cfg.gStyle":"Stil des Dirndls","cfg.s1":"Klassisch","cfg.s2":"Festlich","cfg.s3":"Brautdirndl","cfg.s4":"Modern","cfg.s5":"Landhaus-Stil",
@@ -1015,7 +1048,7 @@
       "mail.open":"Open email","wa.open":"Open WhatsApp",
       "foot.tag":"Manufacturer & supplier of Trachten, dirndls and custom bodices — Sialkot, Pakistan. Quote per design.",
       "foot.small":"© 2026 ZN WEAR, Sialkot · znwear129@gmail.com · +92 324 6154799 · Prices, minimum quantities and lead times per design.",
-      "nav.config":"Configurator","nav.measure":"Size guide",
+      "nav.tools":"Tools","nav.config":"Configurator","nav.measure":"Size guide",
       "cfg.kicker":"Dirndl configurator","cfg.title":"Put your dirndl together",
       "cfg.intro":"Choose the style, bodice, apron and fabric — your selection is turned into a ready-made enquiry and sent to us by email or WhatsApp. Price, minimum quantity and lead time are quoted per design.",
       "cfg.gStyle":"Dirndl style","cfg.s1":"Classic","cfg.s2":"Festive","cfg.s3":"Bridal dirndl","cfg.s4":"Modern","cfg.s5":"Country-house style",
@@ -1133,6 +1166,27 @@
       nav.classList.remove("open");
       menuBtn.setAttribute("aria-expanded", "false");
     });
+  });
+
+  /* ---- Nav: Tools dropdown ---- */
+  var toolsBtn = document.getElementById("toolsBtn");
+  var toolsItem = toolsBtn.parentElement;
+  function closeTools(){
+    toolsItem.classList.remove("open");
+    toolsBtn.setAttribute("aria-expanded", "false");
+  }
+  toolsBtn.addEventListener("click", function(){
+    var open = toolsItem.classList.toggle("open");
+    toolsBtn.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  toolsItem.querySelectorAll("a").forEach(function(a){
+    a.addEventListener("click", closeTools);
+  });
+  document.addEventListener("click", function(e){
+    if (!toolsItem.contains(e.target)) closeTools();
+  });
+  document.addEventListener("keydown", function(e){
+    if (e.key === "Escape") closeTools();
   });
 
   document.getElementById("composer").addEventListener("submit", function(e){ e.preventDefault(); });
